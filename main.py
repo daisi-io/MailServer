@@ -8,6 +8,7 @@ from email.mime.text import MIMEText
 # https://accounts.google.com/b/0/DisplayUnlockCaptcha
 
 def send_email(user:str, password:str, to:str, subject:str="", body:str="", smtp_server_host="smtp.gmail.com"):
+    status = "success"
     try:
         connection = smtplib.SMTP(host=smtp_server_host, port=587)
         connection.starttls()
@@ -33,7 +34,8 @@ def send_email(user:str, password:str, to:str, subject:str="", body:str="", smtp
         connection.quit()
     except smtplib.SMTPAuthenticationError as e:
         print(e)
+        status = "failure"
 
 
-    return "success"
+    return status
 
